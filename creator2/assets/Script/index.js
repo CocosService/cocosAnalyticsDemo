@@ -133,7 +133,8 @@ cc.Class({
     this.printLog("btnLoginFailed clicked");
     cocosAnalytics.CAAccount.loginFailed({
       id: cocosAnalyticsID1,
-      reason: '密码错误' // 失败原因
+      reason: '密码错误', // 失败原因
+      channel: '99999', 
     })
   },
 
