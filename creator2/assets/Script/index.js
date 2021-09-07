@@ -25,7 +25,6 @@ const eventValue = { //事件内容及标签可灵活自定义。后台根据事
   player2: 1
 };
 
-var cocosAnalyticsID1 = -1;
 var cocosAnalyticsID2 = -1;
 
 if (CC_EDITOR) {
@@ -157,16 +156,7 @@ cc.Class({
     console.log("start test ...");
     console.dir(cocosAnalytics);
     // 初始化 , 注意 在调用其他任何方法之前 必须先初始化 SDK 一次。
-    if ((typeof cocosAnalytics) !== 'undefined'){
-        var initArgs = {
-            appID: '639795912',
-            storeID: '100009',
-            engine: 'cocos',
-            callNumber: '13647620853'
-        };
-        
-        cocosAnalyticsID1 = cocosAnalytics.init(initArgs);
-        
+    if ((typeof cocosAnalytics) !== 'undefined'){        
         var initArgs2 = {
             appID: '6397959145',
             storeID: '100000',
