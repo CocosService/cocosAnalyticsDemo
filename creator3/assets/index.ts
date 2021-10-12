@@ -30,44 +30,19 @@ export class Index extends Component {
         if (this.list === null || this.list.content === null) return;
         this.list.content.removeAllChildren();
         
-        // 启用调试信息
+        // 初始化 , 注意 在调用其他任何方法之前 必须先初始化一次。
         this.addItem("启用调试信息", () => {
-            console.log("cocosAnalyticsID1");
-            console.log(cocosAnalyticsID1);
-
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-
-            var info = {
-                id: cocosAnalyticsID1,
-                enabled: true
-            };
-            cocosAnalytics.enableDebug(info);
+            cocosAnalytics.enableDebug(true);
         })
-
         // 开始登陆
         this.addItem("开始登陆", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAAccount.loginStart({
-                id: cocosAnalyticsID1,
                 channel: '99999',
             });
         })
         // 登陆成功
         this.addItem("登陆成功", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAAccount.loginSuccess({
-                id: cocosAnalyticsID1,
                 userID: 'dddddddd',
                 age: 1, // 年龄
                 sex: 1, // 性别：1为男，2为女，其它表示未知
@@ -76,50 +51,23 @@ export class Index extends Component {
         })
         // 登陆失败
         this.addItem("登陆失败", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAAccount.loginFailed({
-                id: cocosAnalyticsID1,
                 reason: '密码错误',
                 channel: '99999',
             });
         })
         // 退出登陆
         this.addItem("退出登陆", () => {
-            console.log("退出登陆 logout");
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
-            cocosAnalytics.CAAccount.logout(cocosAnalyticsID1);
+            cocosAnalytics.CAAccount.logout();
         })
         // 设置帐号类型
         this.addItem("设置用户类型", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
-            var info = {
-                id: cocosAnalyticsID1,
-                type: 'Vip1'
-            };
-            cocosAnalytics.CAAccount.setAccountType(info);
+            cocosAnalytics.CAAccount.setAccountType('Vip1');
         })
         // 创建角色
         //【玩家第一次创建角色时调用】
         this.addItem("创建角色", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAAccount.createRole({
-                id: cocosAnalyticsID1,
                 roleID: 'a1005',
                 userName: '会搓火球',
                 race: '人族',
@@ -129,27 +77,13 @@ export class Index extends Component {
         })
         // 角色等级
         this.addItem("角色等级", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
-            var info = {
-                id: cocosAnalyticsID1,
-                level: 22
-            };
-            cocosAnalytics.CAAccount.setLevel(info);
+            cocosAnalytics.CAAccount.setLevel(10);
         })
         // 事件开始
         // 参数：事件ID（必填）, 不得超过30个字符
         // 参数：事件内容（必填）
         this.addItem("事件开始", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
-            cocosAnalytics.CACustomEvent.onStarted(cocosAnalyticsID1, "自定义事件", {
+            cocosAnalytics.CACustomEvent.onStarted("自定义事件", {
                 name: "突袭",
                 player1: 1,
                 player2: 1
@@ -158,12 +92,7 @@ export class Index extends Component {
         // 事件完成
         // 参数：事件ID（必填）, 不得超过30个字符
         this.addItem("事件完成", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
-            cocosAnalytics.CACustomEvent.onSuccess(cocosAnalyticsID1, "自定义事件", {
+            cocosAnalytics.CACustomEvent.onSuccess("自定义事件", {
                 name: "突袭",
                 player1: 1,
                 player2: 1
@@ -172,12 +101,7 @@ export class Index extends Component {
         // 事件取消
         // 参数：事件ID（必填）, 不得超过30个字符
         this.addItem("事件取消", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
-            cocosAnalytics.CACustomEvent.onCancelled(cocosAnalyticsID1, "自定义事件", {
+            cocosAnalytics.CACustomEvent.onCancelled("自定义事件", {
                 name: "突袭",
                 player1: 1,
                 player2: 1
@@ -186,12 +110,7 @@ export class Index extends Component {
         // 事件失败
         // 参数：事件ID（必填）, 不得超过30个字符
         this.addItem("事件失败", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
-            cocosAnalytics.CACustomEvent.onFailed(cocosAnalyticsID1, "自定义事件", {
+            cocosAnalytics.CACustomEvent.onFailed("自定义事件", {
                 name: "突袭",
                 player1: 1,
                 player2: 1
@@ -199,13 +118,7 @@ export class Index extends Component {
         })
         // 上报玩家付费开始行为
         this.addItem("付费开始", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAPayment.payBegin({
-                id: cocosAnalyticsID1,
                 // amount 付费金额，必填
                 amount: 100,
                 // currencyType 货币类型，可选。默认CNY
@@ -220,13 +133,7 @@ export class Index extends Component {
         })
         // 上报玩家付费成功行为
         this.addItem("付费成功", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAPayment.paySuccess({
-                id: cocosAnalyticsID1,
                 // amount 付费金额，必填
                 amount: 100,
                 // currencyType 货币类型，可选。默认CNY
@@ -241,13 +148,7 @@ export class Index extends Component {
         })
         // 上报玩家付费失败行为
         this.addItem("付费失败", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAPayment.payFailed({
-                id: cocosAnalyticsID1,
                 // amount 付费金额，必填
                 amount: 100,
                 // currencyType 货币类型，可选。默认CNY
@@ -262,13 +163,7 @@ export class Index extends Component {
         })
         // 上报玩家付费取消行为
         this.addItem("付费取消", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAPayment.payCanceled({
-                id: cocosAnalyticsID1,
                 // amount 付费金额，必填
                 amount: 100,
                 // currencyType 货币类型，可选。默认CNY
@@ -283,63 +178,33 @@ export class Index extends Component {
         })
         // 关卡开始
         this.addItem("关卡开始", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CALevels.begin({
-                id: cocosAnalyticsID1,
                 level: "Level1"
             });
         })
         // 关卡完成
         this.addItem("关卡完成", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CALevels.complete({
-                id: cocosAnalyticsID1,
                 level: "Level1"
             });
         })
         // 关卡失败
         this.addItem("关卡失败", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CALevels.failed({
-                id: cocosAnalyticsID1,
                 level: "Level1",
                 reason: "主角死亡"
             });
         })
         // 设置虚拟币留存总量
         this.addItem("设置虚拟币留存总量", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAVirtual.setVirtualNum({
-                id: cocosAnalyticsID1,
                 type: "金币", //虚拟币类型，字符串，"钻石"、"金币"
                 count: 123 //虚拟币数量，long 型
             });
         })
         // 虚拟币获取
         this.addItem("虚拟币获取", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAVirtual.get({
-                id: cocosAnalyticsID1,
                 type: "钻石", //虚拟币类型，字符串，"钻石"、"金币"
                 count: 112, //购买数量，int 数字,
                 reason: "打怪" //获得原因，字符串
@@ -347,13 +212,7 @@ export class Index extends Component {
         })
         // 虚拟币消耗
         this.addItem("虚拟币消耗", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAVirtual.consume({
-                id: cocosAnalyticsID1,
                 type: "金币", //虚拟币类型，字符串，"钻石"、"金币"
                 count: 121111, //购买数量，int 数字,
                 reason: "购物" //消耗原因，字符串
@@ -361,13 +220,7 @@ export class Index extends Component {
         })
         // 购买道具
         this.addItem("购买道具", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAItem.buy({
-                id: cocosAnalyticsID1,
                 itemID: "魔法瓶",
                 itemType: "蓝药",
                 itemCount: 11, //购买数量，int 数字,
@@ -378,13 +231,7 @@ export class Index extends Component {
         })
         // 获得道具
         this.addItem("获得道具", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAItem.get({
-                id: cocosAnalyticsID1,
                 itemID: "魔法瓶",
                 itemType: "蓝药",
                 itemCount: 12, //购买数量，int 数字,
@@ -393,13 +240,7 @@ export class Index extends Component {
         })
         // 消耗道具
         this.addItem("消耗道具", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAItem.consume({
-                id: cocosAnalyticsID1,
                 itemID: "魔法瓶",
                 itemType: "蓝药",
                 itemCount: 11, //购买数量，int 数字,
@@ -415,63 +256,33 @@ export class Index extends Component {
         // CATaskType.Other 其他任务,默认值
         // 开始任务
         this.addItem("开始任务", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CATask.begin({
-                id: cocosAnalyticsID1,
                 taskID: "解救小姑娘",
                 type: cocosAnalytics.CATaskType.BranchLine
             });
         })
         // 完成任务
         this.addItem("完成任务", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CATask.complete({
-                id: cocosAnalyticsID1,
                 taskID: "解救小姑娘"
             });
         })
         // 任务失败
         this.addItem("任务失败", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CATask.failed({
-                id: cocosAnalyticsID1,
                 taskID: "解救小姑娘",
                 reason: "主角死亡"
             });
         })
         // 开始广告
         this.addItem("开始广告", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAAdvertising.begin({
-                id: cocosAnalyticsID1,
                 adID: "15分钟广告",
             });
         })
         // 完成任务
         this.addItem("完成广告", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAAdvertising.complete({
-                id: cocosAnalyticsID1,
                 adID: "15分钟广告",
                 timeLong: 15 * 60,
                 profit: "10钻石"
@@ -479,13 +290,7 @@ export class Index extends Component {
         })
         // 任务失败
         this.addItem("广告失败", () => {
-            if (-1 === cocosAnalyticsID1) {
-                console.error("cocosAnalytics sdk not init yet !");
-                return;
-            }
-            
             cocosAnalytics.CAAdvertising.failed({
-                id: cocosAnalyticsID1,
                 adID: "15分钟广告",
                 reason: "取消播放"
             });
